@@ -164,7 +164,7 @@ var capitolHill = {
   },
   hourlyAvrage: function(){
     var cookiesHour;
-    for( var i=0; i < 15; i++){
+    for( var i=0; i < this.storeHours.length; i++){
       cookiesHour = this.avrgcoksehourly * this.locationRandomCust();
       this.storeHourlyAve.push(Math.round(cookiesHour));
       this.totalCookies +=  Math.round(cookiesHour);
@@ -179,7 +179,7 @@ var hourlySales = document.createElement('ul');
 body.appendChild(hourlySales);
 capitolHill.hourlyAvrage();
 var storeHours = ['6am:','7am:','8am:','9am:','10am:','11am:','12pm:','1pm:', '2pm:', '3pm:', '4pm:', '5pm:', '6pm:', '7pm:', '8pm:'];
-for(var i = 0; i < 15; i++){
+for(var i = 0; i < this.storeHours.length; i++){
   var hours = document.createElement('li');
   hourlySales.appendChild(hours);
   hours.textContent =  storeHours[i]

@@ -5,6 +5,7 @@ console.log('we got main', main);
 
 function Store(name,minCustHourly,maxCustHourly,avrgcoksehourly){
   this.name = name;
+  this.StoreHours = [];
   this.minCustHourly = minCustHourly;
   this.maxCustHourly = maxCustHourly;
   this.avrgcoksehourly = avrgcoksehourly;
@@ -18,7 +19,7 @@ Store.prototype.locationRandomCust = function(){
 
 Store.prototype.hourlyAvrage = function(){
   var cookiesHour;
-  for( var i=0; i < 15; i++){
+  for( var i=0; i < this.storeHours.length; i++){
     cookiesHour = this.avrgcoksehourly * this.locationRandomCust();
     this.storeHourlyAve.push(Math.round(cookiesHour));
     this.totalCookies +=  Math.round(cookiesHour);
@@ -40,17 +41,36 @@ Store.prototype.getTable = function(){
   hourlySales.appendChild(names);
   this.hourlyAvrage();
 
+//var tableHeader = document.getElementById('thead');
   for(var i = 0; i < 15; i++){
     var hours = document.createElement('td');
     hourlySales.appendChild(hours);
-    hours.textContent =  storeHours[i]
-    + this.storeHourlyAve[i] + ' Cookies';
+    hours.textContent = this.storeHourlyAve[i] + ' Cookies';
   }
   var total = document.createElement('td');
-  total.textContent = 'Total: ' + this.totalCookies + ' Cookies';
+  total.textContent =  this.totalCookies + ' Cookies';
   hourlySales.appendChild(total);
   table.appendChild(hourlySales);
 };
+
+function  makeHeader()  {
+  var table = document.getElementById('table');
+  var header = document.createElement('tr');
+  var sOpenHours = document.createElement('th');
+  header.appendChild(sOpenHours);
+  table.appendChild(header);
+  for( var i = 0; i < storeHours.length; i++){
+    sOpenHours = document.createElement('th');
+    sOpenHours.textContent = storeHours[i];
+    header.appendChild(sOpenHours);
+  }
+  sOpenHours = document.createElement('th');
+  header.appendChild(sOpenHours);
+  sOpenHours.textContent = 'Total';
+
+}
+
+
 
 Store.prototype.locationRandomCust = function(){
   return Math.floor(Math.random() * (this.maxCustHourly-this.minCustHourly+1) + this.minCustHourly);
@@ -72,6 +92,7 @@ var seattleCenter = new Store('Seattle Center', 11, 38, 2.7);
 var firstPike = new Store('First and Pike', 23, 65, 6.3);
 
 capitolHill.makeTable();
+makeHeader();
 capitolHill.getTable();
 seattleCenter.getTable();
 firstPike.getTable();
