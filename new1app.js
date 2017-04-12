@@ -65,12 +65,14 @@ Store.prototype.hourlyAvrage = function(){
   }
 };
 
+var capitolHill = new Store('Capitol Hill', 20, 38, 2.3);
 var seaTac = new Store('SeaTac Airport', 3, 24, 1.2);
 var alkai = new Store('Alkai', 2, 16, 4.6);
 var seattleCenter = new Store('Seattle Center', 11, 38, 2.7);
 var firstPike = new Store('First and Pike', 23, 65, 6.3);
 
-seaTac.makeTable();
+capitolHill.makeTable();
+capitolHill.getTable();
 seattleCenter.getTable();
 firstPike.getTable();
 alkai.getTable();
