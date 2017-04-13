@@ -5,7 +5,6 @@ console.log('we got main', main);
 
 function Store(name,minCustHourly,maxCustHourly,avrgcoksehourly){
   this.name = name;
-  this.StoreHours = [];
   this.minCustHourly = minCustHourly;
   this.maxCustHourly = maxCustHourly;
   this.avrgcoksehourly = avrgcoksehourly;
@@ -41,7 +40,6 @@ Store.prototype.getTable = function(){
   hourlySales.appendChild(names);
   this.hourlyAvrage();
 
-//var tableHeader = document.getElementById('thead');
   for(var i = 0; i < 15; i++){
     var hours = document.createElement('td');
     hourlySales.appendChild(hours);
@@ -67,10 +65,7 @@ function  makeHeader()  {
   sOpenHours = document.createElement('th');
   header.appendChild(sOpenHours);
   sOpenHours.textContent = 'Total';
-
 }
-
-
 
 Store.prototype.locationRandomCust = function(){
   return Math.floor(Math.random() * (this.maxCustHourly-this.minCustHourly+1) + this.minCustHourly);
@@ -91,6 +86,26 @@ var alkai = new Store('Alkai', 2, 16, 4.6);
 var seattleCenter = new Store('Seattle Center', 11, 38, 2.7);
 var firstPike = new Store('First and Pike', 23, 65, 6.3);
 
+function handleStoreAddingSubmit(event){
+  event.preventDefault();
+  var form = event.target;
+  var name = form.name.value;
+  console.log(name);
+  var minCustHourly = form.minCustHourly.value;
+  console.log(minCustHourly);
+  var maxCustHourly = form.maxCustHourly.value;
+  var avrgcoksehourly = form.avrgcoksehourly.value;
+  form.name.value = '';
+  form.minCustHourly.value = '';
+  form.maxCustHourly.value = '';
+  form.avrgcoksehourly.value = '';
+  var newStoreName = new Store(name, minCustHourly, maxCustHourly, avrgcoksehourly);
+  console.log( newStoreName);
+  newStoreName.getTable();
+}
+
+var storeAddingForm =  document.getElementById('store-creat');
+storeAddingForm.addEventListener('submit',handleStoreAddingSubmit );
 capitolHill.makeTable();
 makeHeader();
 capitolHill.getTable();
